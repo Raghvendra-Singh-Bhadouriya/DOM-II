@@ -1,0 +1,143 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        
+        <title>Masai Calculator</title>
+        <style>
+            h1{
+                text-align:center;
+                color:rgb(27, 148, 142);
+                font-family: Arial, Helvetica, sans-serif;
+               
+            }
+    
+            #parent{
+                border:1px solid rgb(211, 202, 202);
+                width:28%;
+                height:350px;
+                margin:auto;
+                margin-top:5%;
+                border-radius:10%;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            }
+    
+            #parent>#ch{
+                border:0px solid black;
+                width:75%;
+                height:13%;
+                margin:auto;
+                margin-top:15%;
+                border-radius:10px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            }
+    
+            #child{
+                border:0px solid black;
+                width:75%;
+                height:66%;
+                margin:auto;
+                display:grid;
+                grid-template-columns:repeat(4, 1fr);
+                grid-template-rows:  repeat(4, 1fr);
+                grid-row-gap:4%;
+                grid-column-gap:4%;
+                margin-top:3%;    
+            }
+    
+            h4{
+                font-family:Arial, Helvetica, sans-serif;
+            }
+    
+            button{
+                border:none;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                border-radius:15%;
+            }
+    
+        </style>
+    </head>
+    
+    <body>
+        <h1><u>Masai Calculator</u></h1>
+       <div id="parent">
+           <div id="ch"></div>
+    
+           <div id="child">
+               <button class="btn" style="background-color:white;"><div><h4>1</h4></div></button>
+               <button class="btn" style="background-color:white;"><div><h4>2</h4></div></button>
+               <button class="btn" style="background-color:white;"><div><h4>3</h4></div></button>
+               <button class="oper" style="background-color:black;"><div style="color:white;"><h4>+</h4></div></button>
+               <button class="btn" style="background-color:white;"><div><h4>4</h4></div></button>
+               <button class="btn" style="background-color:white;"><div><h4>5</h4></div></button>
+               <button class="btn" style="background-color:white;"><div><h4>6</h4></div></button>
+               <button class="oper" style="background-color:black;"><div style="color:white;"><h4>-</h4></div></button>
+               <button class="btn" style="background-color:white;"><div><h4>7</h4></div></button>
+               <button class="btn" style="background-color:white;"><div><h4>8</h4></div></button>
+               <button class="btn" style="background-color:white;"><div><h4>9</h4></div></button>
+               <button class="oper" style="background-color:black;"><div style="color:white;"><h4>*</h4></div></button>
+               <button onclick="Clicked()" style="background-color:red;"><div style="color:white;"><h4>c</h4></div></button>
+               <button class="btn" style="background-color:white;"><div><h4>0</h4></div></button>
+               <button id="equal" style="background-color:black;"><div style="color:white;"><h4>=</h4></div></button>
+               <button class="oper"style="background-color:black;"><div style="color:white;"><h4>/</h4></div></button>
+           </div>
+    
+       </div>   
+    </body>
+    <script>
+        let display=document.getElementById("ch")
+        let buttn=document.querySelectorAll(".btn")
+        let isFirstNumber = true;
+        
+        let firstNumber="";
+        let secondNumber="";
+        for(let i=0; i<buttn.length; i++){
+            buttn[i].addEventListener("click",function(){
+                if(isFirstNumber==true){
+                    firstNumber+= buttn[i].innerText
+                    display.innerText=firstNumber
+                }
+                else{
+                    secondNumber+= buttn[i].innerText
+                    display.innerText=secondNumber
+                }
+            })
+        }
+
+        let opt="";
+        let operator=document.querySelectorAll(".oper")
+        for(let i=0; i<operator.length; i++){
+            operator[i].addEventListener("click",function(){
+                isFirstNumber=false
+                opt= operator[i].innerText
+            })
+        }
+
+        function calculate(firstNumber,secondNumber,opt){
+       switch(opt)
+        {
+            case "+":
+            return +firstNumber + +secondNumber
+            case "-":
+            return +firstNumber - +secondNumber
+            case "*":
+            return +firstNumber * +secondNumber
+            case "/":
+            return +firstNumber / +secondNumber
+        }
+    }
+
+    let equal=document.getElementById("equal")
+    equal.addEventListener("click",function(){
+        display.innerText=calculate(firstNumber,secondNumber,opt)
+    })
+
+    function Clicked(){
+        firstNumber="";
+        secondNumber="";
+        opt="";
+        isFirstNumber=true;
+        display.innerText="";
+    }
+</script>
+</html>
